@@ -114,6 +114,16 @@ public class StringUtil {
             throw new UnsupportedOperationException();
         }
     }
+    /*
+    *This is Java code for a custom String utility class "StringUtil". The class contains 4 methods:
+
+countEqualIgnoreCaseAndSpaces: counts the number of words in the "words" array that match the "sample" string, ignoring case and whitespace.
+splitWords: splits a string into words and returns an array of words.
+convertPath: converts the format of a file path from either Unix-style or Windows-style to the other.
+joinWords: takes an array of words and returns a string representation of the array in the format of a list, where each word is separated by a comma.
+All methods include exception handling by throwing UnsupportedOperationException.
+    *
+    * */
 
     public static void main(String[] args) {
         System.out.println("Test 1: countEqualIgnoreCaseAndSpaces");
