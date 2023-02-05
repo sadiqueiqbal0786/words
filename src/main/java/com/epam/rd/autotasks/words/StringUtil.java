@@ -1,22 +1,118 @@
 package com.epam.rd.autotasks.words;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class StringUtil {
     public static int countEqualIgnoreCaseAndSpaces(String[] words, String sample) {
-        throw new UnsupportedOperationException();
+        try {
+            if (sample == null || words == null)
+                return 0;
+
+            sample = sample.trim();
+            sample = sample.toLowerCase();
+            int count = 0;
+            for (String word : words) {
+                word = word.trim();
+                word = word.toLowerCase();
+                if (word.equals(sample))
+                    count++;
+            }
+            return count;
+        }catch (Exception ex){
+            throw new UnsupportedOperationException();
+        }
     }
 
     public static String[] splitWords(String text) {
-        throw new UnsupportedOperationException();
+        try {
+            if (text == null || text.equals("")) return null;
+            text = text.replaceAll("\\s", "\\,");
+            text = text.replaceAll(";", "\\,");
+            text = text.replaceAll(":", "\\,");
+            text = text.replaceAll("\\.", "\\,");
+            text = text.replaceAll("\\?", "\\,");
+            text = text.replaceAll("!", "\\,");
+            String[] texts = new String[1000];
+            ArrayList<String> textSub = new ArrayList<>();
+            texts = text.split(",");
+            for (String s : texts) {
+                if (!s.equals("")) {
+                    textSub.add(s);
+                }
+            }
+            texts = textSub.toArray(new String[0]);
+            if (textSub.isEmpty()) {
+                return null;
+            }
+            return texts;
+        }catch (Exception ex){
+            throw new UnsupportedOperationException();
+        }
     }
 
     public static String convertPath(String path, boolean toWin) {
-        throw new UnsupportedOperationException();
+        try{
+            if(path == null){
+                return null;
+            }else if(path.equals("")) {
+                return null;
+            }else{
+                if(path.contains("C:") &&path.lastIndexOf("C:\\") != 0 ){
+                    return null;
+                }
+                if(path.contains("~") && path.lastIndexOf("~") != 0){
+                    return null;
+                }
+                if(path.contains("/")&&path.contains("\\")) return null;
+                if(path.contains("C:")&&path.contains("/")) return null;
+                if(path.contains("~")&&path.contains("\\")) return null;
+
+
+                if(toWin){
+                    path = path.replace("~","C:\\User");
+                    if(path.indexOf("/")==0) {
+                        path = path.replaceFirst("/", "C:\\\\");// C:\\
+                    }
+                    path = path.replaceAll("/","\\\\");
+                }else{
+                    path = path.replace("C:\\User","~");
+                    path = path.replace("C:\\","/");
+                    path = path.replaceAll("\\\\","/");
+                }
+                return path;
+            }
+        }catch (Exception ex){
+            throw new UnsupportedOperationException();
+
+        }
     }
 
     public static String joinWords(String[] words) {
-        throw new UnsupportedOperationException();
+        try{
+
+            String res = "[";
+            ArrayList<String> List = new ArrayList<>();
+            if (words == null || words.length == 0)
+                return null;
+            for (String word : words)
+            {
+                if (!word.equals(""))
+                    List.add(word);
+            }
+            if (List.size() == 0)
+                return null;
+            String lastChar = List.get(List.size()-1);
+            List.remove(List.size()-1);
+
+            for (String subList : List)
+            {
+                res = res + subList + ", ";
+            }
+            res += lastChar + "]";
+            return res;
+        }catch (Exception ex){
+            throw new UnsupportedOperationException();
+        }
     }
 
     public static void main(String[] args) {
